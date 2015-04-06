@@ -4,6 +4,8 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
 
+  config.ssh.forward_agent = true
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
   end
@@ -11,7 +13,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 3000, host: 3001
 
   # Shell commands to run as root.
-  # Update the package list, install Postgres and create vagrant user, install git.
+  # Update the package list, install Postgres and create vagrant user, install git, install Node.
   $root_commands = <<-END
     sudo apt-get update
     sudo apt-get install libpq-dev -y
